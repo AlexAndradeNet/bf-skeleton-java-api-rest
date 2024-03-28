@@ -1,0 +1,88 @@
+buildscript {
+    repositories {
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+    dependencies {
+        classpath "net.serenity-bdd:serenity-gradle-plugin:4.1.3"
+    }
+}
+
+plugins {
+    id 'java'
+    id 'eclipse'
+    id 'idea'
+    id 'net.serenity-bdd.serenity-gradle-plugin' version '4.1.3'
+    id 'org.sonarqube' version '5.0.0.4638'
+}
+
+apply plugin: 'java'
+apply plugin: 'net.serenity-bdd.serenity-gradle-plugin'
+apply plugin: 'org.sonarqube'
+
+group = 'com.blankfactor.qa.skeleton'
+version = '0.0.1-SNAPSHOT'
+description = 'BF-Skeleton-Java-API-REST'
+java.sourceCompatibility = JavaVersion.VERSION_17
+java.targetCompatibility = JavaVersion.VERSION_17
+compileJava.options.encoding = 'UTF-8'
+compileTestJava.options.encoding = 'UTF-8'
+
+sonar {
+    properties {
+        property 'sonar.projectName', 'QA-com-bf-skeleton-java-rest'
+        property 'sonar.projectKey', 'qa:com-blankfactor-skeleton-java-rest'
+        property 'sonar.java.binaries', 'build/classes'
+        // If your project is for QA (without unit tests), you can set sources to '.' and exclude 'tests' directory
+        // So that SonarQube will check all code without discriminating between main and test code
+        property 'sonar.sources', '.'
+        property "sonar.test.exclusions", "src/test/**/*.java"
+    }
+}
+
+repositories {
+    mavenCentral()
+    mavenLocal()
+}
+
+ext {
+    serenityVersion = '2.0.70'
+    serenityCucumberVersion = '1.9.45'
+}
+
+dependencies {
+    implementation 'io.github.cdimascio:java-dotenv:5.2.2'
+    testImplementation 'net.serenity-bdd:serenity-core:4.1.4'
+    testImplementation 'net.serenity-bdd:serenity-ensure:4.1.4'
+    testImplementation 'net.serenity-bdd:serenity-junit5:4.1.4'
+    testImplementation 'net.serenity-bdd:serenity-screenplay:4.1.4'
+    testImplementation 'net.serenity-bdd:serenity-screenplay-rest:4.1.4'
+    testImplementation 'net.serenity-bdd:serenity-cucumber:4.1.4'
+    testImplementation 'io.cucumber:cucumber-junit-platform-engine:7.16.1'
+    testImplementation 'io.rest-assured:rest-assured:5.4.0'
+    testImplementation 'io.rest-assured:json-path:5.4.0'
+    testImplementation 'io.rest-assured:json-schema-validator:5.4.0'
+    testImplementation 'org.junit.platform:junit-platform-launcher:1.10.2'
+    testImplementation 'org.junit.platform:junit-platform-suite:1.10.2'
+    testImplementation 'org.junit.jupiter:junit-jupiter-engine:5.10.2'
+    testImplementation 'org.junit.vintage:junit-vintage-engine:5.10.2'
+    testImplementation 'org.assertj:assertj-core:3.25.3'
+    testImplementation 'org.hamcrest:hamcrest:2.2'
+}
+
+
+
+test {
+    useJUnitPlatform()
+    // testLogging.showStandardStreams = true
+    systemProperties System.getProperties()
+}
+
+tasks.withType(Test).configureEach {
+    maxParallelForks = Runtime.runtime.availableProcessors().intdiv(2) ?: 1
+}
+
+//gradle.startParameter.continueOnFailure = true
+
+test.finalizedBy(aggregate)
