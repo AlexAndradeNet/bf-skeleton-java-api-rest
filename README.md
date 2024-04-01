@@ -1,6 +1,6 @@
-# REST ASSURED API TESTING FOR START WARS DATABASE
+# REST ASSURED API TESTING FOR THE STAR WARS DATABASE
 
-This robot carries out JSON Schema validations of Star Wars API database (Swapi) responses. This helps
+This robot uses JSON Schema validations of Star Wars API database (Swapi) responses. This helps
 detect any changes and assess their impact on other projects.
 
 ---
@@ -57,7 +57,7 @@ You have two options. You can do it through the command line:
 mvn clean verify -Dcucumber.options="--tags @tag"
 ```
 
-You can do it through the IDE opening the feature file and clicking on the play
+You can do it through the IDE by opening the feature file and clicking on the play
 button.
 
 ### Open the test report
@@ -70,7 +70,7 @@ path [target/site/serenity/index.html](target/site/serenity/index.html).
 
 ## 🔧 TROUBLESHOOTING
 
-If during a commit you get an error like this:
+If, during a commit, you get an error like this:
 
 ### Pre-commit hook failed
 
