@@ -1,7 +1,22 @@
-# REST ASSURED API TESTING FOR START WARS DATABASE
+# REST ASSURED API TESTING FOR THE STAR WARS DATABASE
 
-This robot carries out JSON Schema validations of Star Wars API database (Swapi) responses. This helps
+This robot uses **JSON Schema validations** of Star Wars API database (Swapi) responses. This helps
 detect any changes and assess their impact on other projects.
+
+This project leverages the **Serenity BDD** framework, a comprehensive library designed to streamline the creation of
+high-quality automated acceptance tests, significantly reducing development time. Promoting adherence to the SOLID
+principles ensures that the source code remains maintainable and robust. Additionally, Serenity BDD offers 
+extensive reporting tools and supports parallel test execution, enhancing efficiency and productivity.
+
+Source code serves as a vital communication medium among developers, making it crucial to maintain its cleanliness
+and readability. This project incorporates linting tools such as **pre-commit**to ensure code quality, which
+automatically formats the code with each execution. The project's repository is hosted on GitHub and utilizes **GitHub
+Actions** for continuous integration, effectively preventing the merge of any code that falls short of established
+quality standards.
+
+Finally, the project integrates **SonarQube** to analyze the source code and identify potential issues, ensuring the 
+codebase remains clean and maintainable. You can see more about this in the [CONTRIBUTE.md](CONTRIBUTE.md) section _"Static Code 
+Analysis"_.
 
 ---
 
@@ -57,7 +72,7 @@ You have two options. You can do it through the command line:
 mvn clean verify -Dcucumber.options="--tags @tag"
 ```
 
-You can do it through the IDE opening the feature file and clicking on the play
+You can do it through the IDE by opening the feature file and clicking on the play
 button.
 
 ### Open the test report
@@ -70,7 +85,7 @@ path [target/site/serenity/index.html](target/site/serenity/index.html).
 
 ## 🔧 TROUBLESHOOTING
 
-If during a commit you get an error like this:
+If, during a commit, you get an error like this:
 
 ### Pre-commit hook failed
 
