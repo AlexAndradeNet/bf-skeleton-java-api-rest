@@ -9,7 +9,7 @@ principles ensures that the source code remains maintainable and robust. Additio
 extensive reporting tools and supports parallel test execution, enhancing efficiency and productivity.
 
 Source code serves as a vital communication medium among developers, making it crucial to maintain its cleanliness
-and readability. This project incorporates linting tools such as **pre-commit**to ensure code quality, which
+and readability. This project incorporates linting tools such as **pre-commit** to ensure code quality, which
 automatically formats the code with each execution. The project's repository is hosted on GitHub and utilizes **GitHub
 Actions** for continuous integration, effectively preventing the merge of any code that falls short of established
 quality standards.
