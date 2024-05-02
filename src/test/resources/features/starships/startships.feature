@@ -2,6 +2,6 @@ Feature: List all starships
 
   Scenario: Successfully retrieve a list of starships
     Given Fred is a Star Wars fan
-    When the user requests information about all starships
-    Then the successful response should contain a list of starships
-    And the response should include pagination properties "next" and "previous"
+    When he requests information about all starships
+    Then he should receive a successful response containing a list of starships
+    And he should be able to explore the information through the "next" and "previous" pagination properties

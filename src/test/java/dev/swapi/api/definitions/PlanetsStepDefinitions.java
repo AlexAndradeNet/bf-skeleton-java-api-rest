@@ -11,36 +11,34 @@ import dev.swapi.api.tasks.CallApi;
 import dev.swapi.api.utils.EnvironmentPropertiesUtils;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import net.serenitybdd.screenplay.actors.OnStage;
+import net.serenitybdd.screenplay.Actor;
 import org.apache.http.HttpStatus;
 
 public class PlanetsStepDefinitions {
 
-    @When("the user requests information for the planet {string}")
-    public void theUserRequestsInformationForThePlanet(String planetName) {
+    @When("{actor} requests information for the planet {string}")
+    public void theUserRequestsInformationForThePlanet(Actor actor, String planetName) {
         String planetsEndpoint =
                 EnvironmentPropertiesUtils.getProperty("swapi.api.planets.endpoint");
-        OnStage.theActorInTheSpotlight()
-                .attemptsTo(CallApi.fromEndpoint(planetsEndpoint.formatted(planetName)));
+        actor.attemptsTo(CallApi.fromEndpoint(planetsEndpoint.formatted(planetName)));
     }
 
-    @Then("the successful response should contain a list of planets")
-    public void theSuccessfulResponseShouldContainAListOfPlanets() {
-        OnStage.theActorInTheSpotlight()
-                .should(
-                        seeThat(
-                                ValidateApiResponseQuestion.matching(
-                                        HttpStatus.SC_OK, "swapi.api.planets.schema")),
-                        seeThat(ResponseResultsFieldQuestion.isNotEmpty()));
+    @Then("{actor} should receive a successful response containing a list of planets")
+    public void theSuccessfulResponseShouldContainAListOfPlanets(Actor actor) {
+        actor.should(
+                seeThat(
+                        ValidateApiResponseQuestion.matching(
+                                HttpStatus.SC_OK, "swapi.api.planets.schema")),
+                seeThat(ResponseResultsFieldQuestion.isNotEmpty()));
     }
 
-    @Then("the {string} field of the first planet in the list should be {string}")
-    public void theFieldOfTheFirstPlanetInTheListShouldBe(String fieldName, String expectedValue) {
-        OnStage.theActorInTheSpotlight()
-                .should(
-                        seeThat(
-                                "Planet name",
-                                ThePlanetQuestion.fieldOfFirstPlanet(fieldName),
-                                equalTo(expectedValue)));
+    @Then("{actor} should see that the {word} of the first planet listed is {string}")
+    public void theFieldOfTheFirstPlanetInTheListShouldBe(
+            Actor actor, String fieldName, String expectedValue) {
+        actor.should(
+                seeThat(
+                        "Planet name",
+                        ThePlanetQuestion.fieldOfFirstPlanet(fieldName),
+                        equalTo(expectedValue)));
     }
 }
