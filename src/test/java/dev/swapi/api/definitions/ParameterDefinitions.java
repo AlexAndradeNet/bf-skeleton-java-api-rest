@@ -9,7 +9,7 @@ import net.serenitybdd.screenplay.actors.OnlineCast;
 
 public class ParameterDefinitions {
 
-    @ParameterType("Elizabeth|Verena|Alexander|Fred")
+    @ParameterType("Elizabeth|Verena|Alexander|Fred|she|he|they|him|her")
     public Actor actor(String actorName) {
         return OnStage.theActorCalled(actorName);
     }
